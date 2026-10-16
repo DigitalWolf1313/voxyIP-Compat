@@ -6,7 +6,7 @@ pluginManagement {
         maven {
             url = uri("https://artifex.soh.gg/maven/m3t4f1v3/bp-voxy-packages/")
         }
-        if (providers.gradleProperty("useRubyOnly").orNull.toBoolean()) {
+        if (providers.gradleProperty("useRubyOnly").orNull.toBoolean().not()) {
             maven("https://maven.fabricmc.net/") { name = "Fabric" }
             maven("https://maven.neoforged.net/releases/") { name = "NeoForged" }
             maven("https://maven.kikugie.dev/snapshots") { name = "KikuGie" }
@@ -39,11 +39,13 @@ dependencyResolutionManagement {
     repositories {
         mavenLocal()
         mavenCentral()
-        maven("https://maven.fabricmc.net/") { name = "Fabric" }
-        maven("https://api.modrinth.com/maven") { name = "Modrinth" }
-        maven("https://maven.shedaniel.me/") { name = "Shedaniel" }
-        maven("https://maven.terraformersmc.com/releases/") { name = "TerraformersMC" }
-        maven("https://maven.neoforged.net/releases/") { name = "NeoForged" }
-        maven("https://maven.parchmentmc.org") { name = "ParchmentMC" }
+        if (providers.gradleProperty("useRubyOnly").orNull.toBoolean().not()) {
+            maven("https://maven.fabricmc.net/") { name = "Fabric" }
+            maven("https://api.modrinth.com/maven") { name = "Modrinth" }
+            maven("https://maven.shedaniel.me/") { name = "Shedaniel" }
+            maven("https://maven.terraformersmc.com/releases/") { name = "TerraformersMC" }
+            maven("https://maven.neoforged.net/releases/") { name = "NeoForged" }
+            maven("https://maven.parchmentmc.org") { name = "ParchmentMC" }
+        }
     }
 }
